@@ -33,7 +33,7 @@ namespace GameSystem.SaveLoad
         public Vector3 angularVelocity;
 
 
-        public SDictionary<string, SavedState> savedStates;
+        public SDictionary<string, SavedState> savedStates = new SDictionary<string, SavedState>();
 
         public ObjectSaveData(){}
         public ObjectSaveData(Saveable go)
@@ -59,10 +59,24 @@ namespace GameSystem.SaveLoad
                 velocity = rigidbody.velocity;
                 angularVelocity = rigidbody.angularVelocity;
             }
+            if (go.TryGetComponent<CharacterController>(out var characterController))
+            {
+            }
             foreach (var component in go.GetComponents<ISaveSerializable>())
             {
                 component.SetSaveState(this);
             }
+            // savedStates["data"] = new SavedState
+            // {
+            //     data = JsonUtility.ToJson(go.gameObject, true)
+            // };
+            // foreach (var component in go.GetComponents<MonoBehaviour>())
+            // {
+            //     savedStates[component.name] = new SavedState
+            //     {
+            //         data = JsonUtility.ToJson(component, true)
+            //     };
+            // }
 
             if (go.transform.parent != null)
             {
@@ -101,6 +115,19 @@ namespace GameSystem.SaveLoad
             {
                 component.LoadSaveState(this);
             }
+            // foreach (var component in go.GetComponents<MonoBehaviour>())
+            // {
+            //     JsonUtility.FromJsonOverwrite(savedStates[component.name].data, component);
+            //     // savedStates[component.name] = new SavedState
+            //     // {
+            //     //     data = JsonUtility.ToJson(component);
+            //     // };
+            // }
+            // JsonUtility.FromJsonOverwrite(savedStates["data"].data, go.gameObject);
+            //  = new SavedState
+            // {
+            //     data = JsonUtility.ToJson(go.gameObject, true)
+            // };
         }
 
         protected bool Equals(ObjectSaveData other)

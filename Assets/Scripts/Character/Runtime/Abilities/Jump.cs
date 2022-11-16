@@ -16,12 +16,12 @@ namespace Simpson.Character.Abilities
         
         public override void OnStart()
         {
-            CharacterStateManager.animator.SetBool("Jump", true);
+            // CharacterStateManager.animator.SetBool("Jump", true);
         }
 
         public override void OnStop()
         {
-            CharacterStateManager.animator.SetBool("Jump", false);
+            // CharacterStateManager.animator.SetBool("Jump", false);
         }
 
         public override bool CanStart()

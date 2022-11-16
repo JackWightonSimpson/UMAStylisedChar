@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace GameSystem.SaveLoad
 {
+    [ExecuteAlways]
     public class Saveable : MonoBehaviour
     {
         [field: SerializeField]
@@ -23,9 +24,12 @@ namespace GameSystem.SaveLoad
         [field: SerializeField] public string PrefabPath { get; private set; }
 
         
-        [SerializeField] private int instanceID = 0;
+        // [SerializeField] 
+        private int instanceID = 0;
+        
         private void Awake()
         {
+            Debug.Log($"{instanceID} - {GetInstanceID()}");
             if (Application.isPlaying)
             {
                 if (ScenePath == null)
@@ -40,6 +44,7 @@ namespace GameSystem.SaveLoad
             }
             else
             {
+                Debug.Log($"{instanceID} - {GetInstanceID()}");
                 if (instanceID == 0)
                 {
                     instanceID = GetInstanceID();
@@ -82,6 +87,7 @@ namespace GameSystem.SaveLoad
 
         private void OnValidate()
         {
+            // Debug.Log($"{instanceID} - {GetInstanceID()}");
             if (ID == null)
             {
                 ID = Guid.NewGuid().ToString();

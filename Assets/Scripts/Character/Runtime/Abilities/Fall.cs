@@ -16,12 +16,12 @@ namespace Simpson.Character.Abilities
 
         public override bool CanStart()
         {
-            return CharacterStateManager.CanFall;
+            return CharacterStateManager.CanFall; //&& !CharacterStateManager.Grounded;
         }
 
         public override bool CanStop()
         {
-            return !CharacterStateManager.CanFall;
+            return !CharacterStateManager.CanFall; // || CharacterStateManager.Grounded;
         }
 
         public override void UpdateCharacter()
