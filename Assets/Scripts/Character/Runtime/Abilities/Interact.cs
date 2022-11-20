@@ -11,12 +11,12 @@ namespace Simpson.Character.Abilities
         public override void Init()
         {
             Interactor = GetComponent<Interactor>();
-            interact = CharacterStateManager.playerInput.actions.FindAction("Interact");
+            interact = CharacterStateManager.PlayerInput.actions.FindAction("Interact");
         }
         
         public override void OnStart()
         {
-            CharacterStateManager.animator.CrossFade("Interact", 0.2f);
+            CharacterStateManager.Animator.CrossFade("Interact", 0.2f);
         }
 
         public override void OnStop()

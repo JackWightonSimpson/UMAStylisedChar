@@ -7,20 +7,22 @@ namespace Simpson.Character.Abilities
     public class FpsMovement : CharacterAbility
     {
         private InputAction move;
+        private InputAction look;
         private InputAction toggle;
         public float turnAcceleration = 10f;
 
         [SerializeField] private CinemachineVirtualCamera defaultCam;
         [SerializeField] private CinemachineVirtualCamera aimCam;
+        [SerializeField] private Transform camTarget;
 
         public bool toggleActivated = false;
         public bool stopActivated = false;
-        private bool activated = false;
         
         public override void Init()
         {
-            move = CharacterStateManager.playerInput.actions.FindAction("Move");
-            toggle = CharacterStateManager.playerInput.actions.FindAction("ToggleFp");
+            move = CharacterStateManager.PlayerInput.actions.FindAction("Move");
+            look = CharacterStateManager.PlayerInput.actions.FindAction("Look");
+            toggle = CharacterStateManager.PlayerInput.actions.FindAction("ToggleFp");
             toggle.performed += c =>
             {
                 toggleActivated = !Active;
@@ -32,15 +34,13 @@ namespace Simpson.Character.Abilities
         {
             aimCam.Priority = 11;
             defaultCam.Priority = 9;
-            activated = true;
         }
 
         public override void OnStop()
         {
             aimCam.Priority = 9;
             defaultCam.Priority = 11;
-            CharacterStateManager.animator.SetFloat("Move", 0f);
-            activated = false;
+            CharacterStateManager.Animator.SetFloat("Move", 0f);
         }
 
         public override bool CanStart()
@@ -57,37 +57,42 @@ namespace Simpson.Character.Abilities
         {
             toggleActivated = false;
             var moveDir = move.ReadValue<Vector2>();
-            var xForm = transform;
-            CharacterStateManager.animator.SetFloat("Forward", moveDir.y);
-            CharacterStateManager.animator.SetFloat("Side", moveDir.x);
-            CharacterStateManager.animator.SetFloat("Move", moveDir.magnitude);
             
+            CharacterStateManager.Animator.SetFloat("Forward", moveDir.y);
+            CharacterStateManager.Animator.SetFloat("Side", moveDir.x);
             
-            //TODO: orientation
-                
-            var targetRot = Vector3.SignedAngle(Vector3.forward, CharacterStateManager.cameraTransform.forward, Vector3.up);
+            var lookVector = look.ReadValue<Vector2>();
+            var currentRot = Vector3.SignedAngle(Vector3.forward, CharacterStateManager.transform.forward, Vector3.up);
+            // var currentPitch = Vector3.SignedAngle(Vector3.up, aimCam.transform.up, Vector3.right);
+            if (lookVector.sqrMagnitude >= 0.01f)
+            {
+                currentRot += lookVector.x * turnAcceleration;
+                // currentPitch += lookVector.y * turnAcceleration;
+            }
+
+            // clamp our rotations so our values are limited 360 degrees
+            currentRot = ClampAngle(currentRot, float.MinValue, float.MaxValue);
+
             CharacterStateManager.NextOrientation =
-                Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,targetRot,0), turnAcceleration * Time.deltaTime);
+                Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,currentRot,0), CharacterStateManager.activeConfig.TurnAcceleration * Time.deltaTime);
             
-            // var direction = xForm.forward * moveDir.y + xForm.right * moveDir.x;
-            // direction = direction.normalized;
             
-            //
-            // var speed = Vector3.Lerp(new Vector3(previous.x, 0, previous.z), 
-            //     xForm.forward*moveState.speed,
-            //     moveState.acceleration * Time.deltaTime);
-            //
-            // if (moveDir.magnitude > 0.01f)
-            // {
-            //     var forward = cameraTransform.forward.ProjectOntoPlane(Vector3.up).normalized;
-            //     var right = cameraTransform.right.ProjectOntoPlane(Vector3.up).normalized;
-            //     RotateToTarget(forward*moveDir.y + right*moveDir.x);
-            // }
+            // aimCam.transform.rotation =
+            //     Quaternion.Slerp(aimCam.transform.rotation,Quaternion.Euler(currentPitch,0,0), turnAcceleration * Time.deltaTime);
+            
         }
 
         public override void Cleanup()
         {
             toggleActivated = false;
+        }
+        
+        
+        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+        {
+            if (lfAngle < -360f) lfAngle += 360f;
+            if (lfAngle > 360f) lfAngle -= 360f;
+            return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
     }
 }

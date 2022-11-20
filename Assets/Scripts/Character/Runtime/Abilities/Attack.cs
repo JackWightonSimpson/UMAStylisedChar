@@ -27,17 +27,17 @@ namespace Simpson.Character.Abilities
         
         public override void Init()
         {
-            attack = CharacterStateManager.playerInput.actions.FindAction("Attack");
+            attack = CharacterStateManager.PlayerInput.actions.FindAction("Attack");
         }
         
         public override void OnStart()
         {
-            CharacterStateManager.animator.SetBool("Attack", true);
+            CharacterStateManager.Animator.SetBool("Attack", true);
         }
 
         public override void OnStop()
         {
-            CharacterStateManager.animator.SetBool("Attack", false);
+            CharacterStateManager.Animator.SetBool("Attack", false);
         }
 
         public override bool CanStart()
@@ -60,7 +60,7 @@ namespace Simpson.Character.Abilities
         
         private void OnHit(Collider collider)
         {
-            if (!hit.Contains(collider.gameObject))
+            if (collider.gameObject != this.gameObject && !hit.Contains(collider.gameObject))
             {
                 hit.Add(collider.gameObject);
                 Debug.Log("Hit: "+collider.gameObject.name);

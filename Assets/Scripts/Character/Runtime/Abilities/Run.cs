@@ -8,17 +8,17 @@ namespace Simpson.Character.Abilities
         
         public override void Init()
         {
-            attack = CharacterStateManager.playerInput.actions.FindAction("Sprint");
+            attack = CharacterStateManager.PlayerInput.actions.FindAction("Sprint");
         }
         
         public override void OnStart()
         {
-            CharacterStateManager.animator.SetBool("Run", true);
+            CharacterStateManager.Animator.SetBool("Run", true);
         }
 
         public override void OnStop()
         {
-            CharacterStateManager.animator.SetBool("Run", false);
+            CharacterStateManager.Animator.SetBool("Run", false);
         }
 
         public override bool CanStart()

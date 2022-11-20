@@ -4,31 +4,31 @@ namespace Simpson.Character.Abilities
 {
     public class Crouch : CharacterAbility
     {
-        private InputAction attack;     
+        private InputAction action;     
         
         public override void Init()
         {
-            attack = CharacterStateManager.playerInput.actions.FindAction("Crouch");
+            action = CharacterStateManager.PlayerInput.actions.FindAction("Crouch");
         }
         
         public override void OnStart()
         {
-            CharacterStateManager.animator.SetBool("Crouching", true);
+            CharacterStateManager.Animator.SetBool("Crouching", true);
         }
 
         public override void OnStop()
         {
-            CharacterStateManager.animator.SetBool("Crouching", false);
+            CharacterStateManager.Animator.SetBool("Crouching", false);
         }
 
         public override bool CanStart()
         {
-            return CharacterStateManager.Grounded && attack.IsPressed();
+            return CharacterStateManager.Grounded && action.IsPressed();
         }
 
         public override bool CanStop()
         {
-            return !attack.IsPressed() || !CharacterStateManager.Grounded;
+            return !action.IsPressed() || !CharacterStateManager.Grounded;
         }
 
         public override void UpdateCharacter()

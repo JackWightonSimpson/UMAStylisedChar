@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine.Utility;
 using GameSystem.SaveLoad;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,72 +16,101 @@ namespace Simpson.Character
 
         [SerializeField] 
         private CharacterAbility activeAbility;
-
-        private State state = new State();
-
-        [field: SerializeField] public Vector3 LastVelocity => state.LastVelocity;
         
+        [SerializeField] public State state = new State();
+
+        [SerializeField] public MovementConfig activeConfig;
+        [SerializeField] private List<MovementConfig> configs;
+        
+
         [field:SerializeField] 
+        public LayerMask GroundLayers { get; set; }
+
+        private RaycastHit[] hits = new RaycastHit[10];
+
+        [field: SerializeField] 
+        public float GroundCheckOffset { get; private set; } = -.02f;
+        [field: SerializeField] 
+        public float GroundCheckRadius { get; private set; } = -.01f;
+        
+        [field:HideInInspector]
+        [SerializeField] 
+        public Transform cameraTransform;
+        
+        [field:HideInInspector]
+        [field:SerializeField] 
+        public CharacterController Controller { get; private set; }
+        
+        [field:HideInInspector]
+        [field:SerializeField] 
+        public PlayerInput PlayerInput { get; private set; }
+        
+        [field:HideInInspector]
+        [field:SerializeField] 
+        public Animator Animator { get; private set; }
+
+        private InputAction move;
+        
+
+        public bool Swimming => false;
+        
+        public bool CanFall => activeConfig.CanFall;
+
+        public bool UseRootMotion => activeConfig.UseRootMotion;
+        [field:SerializeField] 
+        public bool Grounded { get; private set; }
+        [field:SerializeField] 
+        public Vector3 GroundNormal { get; private set; } = Vector3.up;
+
+        public Vector3 LastVelocity => state.LastVelocity;
+        
         public Vector3 NextVelocity {
             get => state.NextVelocity;
             set => state.NextVelocity = value;
         }
         
-        [field:SerializeField] 
         public Vector3 RootMotionMove => state.RootMotionMove;
         
-        [field:SerializeField] 
         public Quaternion LastOrientation => state.LastOrientation;
         
-        [field:SerializeField] 
         public Quaternion NextOrientation {
             get => state.NextOrientation;
             set => state.NextOrientation = value;
         }
-        
-        
 
-        [SerializeField] public Transform cameraTransform;
-        [field:SerializeField] 
-        public LayerMask GroundLayers { get; set; }
-        [field:SerializeField] 
-        public bool Grounded { get; private set; }
-
-        [field: SerializeField] public float GroundCheckOffset { get; private set; } = -.02f;
-        [field: SerializeField] 
-        public float GroundCheckRadius { get; private set; } = -.01f;
         
-        [field:HideInInspector]
-        [field:SerializeField] 
-        public CharacterController controller { get; private set; }
+        #region setup
         
-        [field:HideInInspector]
-        [field:SerializeField] 
-        public PlayerInput playerInput { get; private set; }
-        
-        [field:HideInInspector]
-        [field:SerializeField] 
-        public Animator animator { get; private set; }
-
         private void Awake()
         {
-            controller = GetComponent<CharacterController>();
-            playerInput = GetComponent<PlayerInput>();
-            animator = GetComponent<Animator>();
+            Controller = GetComponent<CharacterController>();
+            PlayerInput = GetComponent<PlayerInput>();
+            Animator = GetComponent<Animator>();
             if (cameraTransform == null)
             {
+                //TODO: handle scene switch
                 cameraTransform = Camera.main.transform;
             }
+
+            move = PlayerInput.actions.FindAction("Move");
         }
 
         private void Start()
         {
             SetupStates();
+            SetupConfig();
+        }
+
+        private void SetupConfig()
+        {
+            configs.Sort();
+            activeConfig = configs.LastOrDefault();
         }
 
         private void OnEnable()
         {
             SetupStates();
+            move = PlayerInput.actions.FindAction("Move");
         }
         
         private void SetupStates()
@@ -99,36 +129,59 @@ namespace Simpson.Character
                 characterAbility.Initialise();
             }
         }
-        
-        void FootL() {}
 
-        void FootR() {}
+        #endregion
         
-        void Land() {}
-        
-        void Hit() {}
-
         private void GroundedCheck()
         {
             // set sphere position, with offset
-            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y + controller.radius + GroundCheckOffset, transform.position.z);
+            var radius = Controller.radius;
+            var position = transform.position;
+            var spherePosition = new Vector3(position.x, position.y + radius, position.z);
             //TODO: normals
-            Grounded = Physics.CheckSphere(spherePosition, controller.radius + GroundCheckRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+            var hitCount = Physics.SphereCastNonAlloc(spherePosition, radius+GroundCheckRadius, Vector3.down, hits, 
+                GroundCheckOffset*-1, GroundLayers, QueryTriggerInteraction.Ignore);
+            
+            Grounded = hitCount > 0;
+            GroundNormal = Vector3.zero;
+            for (var i = 0; i < hitCount; i++)
+            {
+                GroundNormal += hits[i].normal;
+            }
 
+            GroundNormal = GroundNormal.normalized;
             // update animator if using character
-            animator.SetBool("Grounded", Grounded);
+            Animator.SetBool("Grounded", Grounded);
+            if (Grounded)
+            {
+                // reset the fall timeout timer
+                state.fallTimeoutDelta = state.FallTimeout;
+                Animator.SetBool("falling", false);
+                Controller.stepOffset = 0.3f;
+                state.LastVelocity = new Vector3(LastVelocity.x,Mathf.Max(-2f, LastVelocity.y), LastVelocity.z);
+            }
+            else
+            {
+                if (state.fallTimeoutDelta >= 0.0f)
+                {
+                    state.fallTimeoutDelta -= Time.deltaTime;
+                }
+                else
+                {
+                    if (!Animator.GetBool("falling"))
+                    {
+                        // Animator.SetTrigger("Transition");
+                    }
+                    Controller.stepOffset = 0.0f;
+                    Animator.SetBool("falling", true);
+                }
+            }
         }
-
 
         public void FixedUpdate()
         {
-            //update env data
             NextVelocity = Vector3.zero;
-            state.RootMotionMove -= state.RootMotionMove.y*Vector3.up;
             
-
-            //Test Conditions
-            // animator.SetBool("Grounded", controller.isGrounded);
             GroundedCheck();
             
             foreach (var characterAbility in abilities)
@@ -139,6 +192,31 @@ namespace Simpson.Character
             {
                 characterAbility.TryStart();
             }
+
+            
+            var moveDir = move.ReadValue<Vector2>();
+            Animator.SetFloat("Forward",moveDir.magnitude/Math.Max(1f,moveDir.magnitude));
+            Animator.SetFloat("Side", 0f);
+            Animator.SetFloat("Move", moveDir.magnitude/Math.Max(1f,moveDir.magnitude));
+            
+            if (moveDir.magnitude > 0.01f)
+            {
+                var forward = cameraTransform.forward.ProjectOntoPlane(Vector3.up).normalized;
+                var right = cameraTransform.right.ProjectOntoPlane(Vector3.up).normalized;
+                var targetRot = Vector3.SignedAngle(Vector3.forward, forward*moveDir.y + right*moveDir.x, Vector3.up);
+                NextOrientation =
+                    Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,targetRot,0), activeConfig.TurnAcceleration * Time.deltaTime);
+            }
+            
+            if (activeConfig.UseRootMotion)
+            {
+                NextVelocity = RootMotionMove / Time.deltaTime;
+                NextVelocity += LastVelocity.y * Vector3.up;
+            }
+            else
+            {
+                NextVelocity = Vector3.Lerp(LastVelocity, NextVelocity, activeConfig.Acceleration * Time.deltaTime);
+            }
             
             foreach (var characterAbility in abilities)
             {
@@ -147,35 +225,61 @@ namespace Simpson.Character
                     characterAbility.UpdateCharacter();
                 }
             }
+            
+            if (CanFall)
+            {
+                //TODO: better componentwise v calc ?
+                NextVelocity += Physics.gravity * Time.deltaTime;
+            }
 
-            controller.Move(NextVelocity * Time.deltaTime);
-            state.LastVelocity = controller.velocity;
+            
+            Controller.Move(NextVelocity * Time.deltaTime);
+            state.LastVelocity = NextVelocity;
             transform.localRotation = NextOrientation;
-            animator.SetFloat("turnDelta",Mathf.Rad2Deg*Quaternion.Angle(LastOrientation, NextOrientation));
+            Animator.SetFloat("turnDelta",Mathf.Rad2Deg*Quaternion.Angle(LastOrientation, NextOrientation));
+            Animator.SetFloat("forwardSpeed",Vector3.Dot(state.LastVelocity, transform.forward));
+            Animator.SetFloat("sideSpeed",Vector3.Dot(state.LastVelocity, transform.right));
+            Animator.SetFloat("verticalSpeed",Vector3.Dot(NextVelocity, transform.up));
             state.LastOrientation = transform.localRotation;
+            state.RootMotionMove = Vector3.zero;
             
             foreach (var characterAbility in abilities)
             {
                 characterAbility.Cleanup();
             }
-            state.RootMotionMove = Vector3.zero;
-            animator.SetFloat("forwardSpeed",Vector3.Dot(state.LastVelocity, transform.forward));
-            animator.SetFloat("sideSpeed",Vector3.Dot(state.LastVelocity, transform.right));
-            animator.SetFloat("verticalSpeed",Vector3.Dot(state.LastVelocity, transform.up));
         }
+
+        #region events/animation
         
-
-        public bool Swimming => false;
-        
-        public bool CanFall => true;
-
-        public bool UseRootMotion { get; set; } = true;
-
         private void OnAnimatorMove ()
         {
-            state.RootMotionMove += this.animator.deltaPosition;
+            state.RootMotionMove += this.Animator.deltaPosition;
+        }
+
+        private void AddMoveConfig(MovementConfig config)
+        {
+            configs.Add(config);
+            SetupConfig();    
         }
         
+        private void RemoveMoveConfig(MovementConfig config)
+        {
+            configs.Remove(config);
+            SetupConfig();
+        }
+        
+        void FootL() {}
+
+        void FootR() {}
+        
+        void Land() {}
+        
+        void Hit() {}
+
+        #endregion
+        
+        #region debug
+
         private void OnDrawGizmosSelected()
         {
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
@@ -184,13 +288,16 @@ namespace Simpson.Character
             if (Grounded) Gizmos.color = transparentGreen;
             else Gizmos.color = transparentRed;
 			
-            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y + controller.radius + GroundCheckOffset, transform.position.z);
-            //TODO: normals
-            // Grounded = Physics.CheckSphere(spherePosition, , GroundLayers, QueryTriggerInteraction.Ignore);
-            // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
-            Gizmos.DrawSphere(spherePosition, controller.radius + GroundCheckRadius);
-            // Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y + GroundCheckRadius + _controller.height, transform.position.z), GroundedRadius);
+            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y + Controller.radius + GroundCheckOffset, transform.position.z);
+            
+            Gizmos.DrawSphere(spherePosition, Controller.radius + GroundCheckRadius);
+            
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawRay(transform.position, GroundNormal);
         }
+        #endregion
+
+        #region save/load
 
         public void SetSaveState(ObjectSaveData data)
         {
@@ -223,28 +330,41 @@ namespace Simpson.Character
                 }
             }
         }
+        
+
+        #endregion
+
 
         [Serializable]
-        private class State
+        public class State
         {
 
             [field:SerializeField] 
-            public Vector3 LastVelocity { get; set; }
+            public Vector3 LastVelocity { get; set; } = Vector3.zero;
         
             [field:SerializeField] 
-            public Vector3 NextVelocity { get; set; }
+            public Vector3 NextVelocity { get; set; } = Vector3.zero;
         
             [field:SerializeField] 
-            public Vector3 RootMotionMove { get; set; }
+            public Vector3 RootMotionMove { get; set; } = Vector3.zero;
         
             [field:SerializeField] 
-            public Quaternion LastOrientation { get; set; }
+            public Quaternion LastOrientation { get; set; } = Quaternion.identity;
         
             [field:SerializeField] 
-            public Quaternion NextOrientation { get; set; }
+            public Quaternion NextOrientation { get; set; } = Quaternion.identity;
         
             [field:SerializeField] 
             public string ActiveAbilityName { get; set; }
+            
+            [Tooltip("The height the player can jump")]
+            public float JumpHeight = 1.2f;
+            [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+            public float Gravity = -15.0f;
+            [Space(10)]
+            [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+            public float FallTimeout = 0.15f;
+            public float fallTimeoutDelta;
         }
     }
 }

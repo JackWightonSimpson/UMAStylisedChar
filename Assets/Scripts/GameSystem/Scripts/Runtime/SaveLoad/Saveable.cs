@@ -29,7 +29,7 @@ namespace GameSystem.SaveLoad
         
         private void Awake()
         {
-            Debug.Log($"{instanceID} - {GetInstanceID()}");
+            // Debug.Log($"{instanceID} - {GetInstanceID()}");
             if (Application.isPlaying)
             {
                 if (ScenePath == null)
@@ -44,7 +44,7 @@ namespace GameSystem.SaveLoad
             }
             else
             {
-                Debug.Log($"{instanceID} - {GetInstanceID()}");
+                // Debug.Log($"{instanceID} - {GetInstanceID()}");
                 if (instanceID == 0)
                 {
                     instanceID = GetInstanceID();
