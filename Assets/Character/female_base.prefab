@@ -6405,6 +6405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Order>k__BackingField: 0
   <Active>k__BackingField: 0
+  shouldCrouch: 0
 --- !u!114 &1166404770324805367
 MonoBehaviour:
   m_ObjectHideFlags: 0

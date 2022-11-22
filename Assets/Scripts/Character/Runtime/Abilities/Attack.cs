@@ -33,16 +33,20 @@ namespace Simpson.Character.Abilities
         public void OnAttack(InputValue value)
         {
             attack = value.isPressed;
+            if (Active)
+            {
+                CharacterStateManager.Animator.SetTrigger("Attack");
+            }
         }
         
         public override void OnStart()
         {
-            CharacterStateManager.Animator.SetBool("Attack", true);
+            CharacterStateManager.Animator.SetTrigger("Attack");
         }
 
         public override void OnStop()
         {
-            CharacterStateManager.Animator.SetBool("Attack", false);
+            CharacterStateManager.Animator.ResetTrigger("Attack");
         }
 
         public override bool CanStart()
