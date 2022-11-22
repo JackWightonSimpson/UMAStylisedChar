@@ -3,6 +3,8 @@ using System.Linq;
 using GameSystem.SaveLoad;
 using GameSystem.Util;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
 namespace GameSystem.Player
@@ -11,6 +13,8 @@ namespace GameSystem.Player
     {
 
         [SerializeField] private SaveablePlayer playerPrefab;
+
+        [SerializeField] private InputSystemUIInputModule uiInput;
 
         private SaveablePlayer activePlayer;
         private string targetSpawnId = "default";
@@ -54,6 +58,7 @@ namespace GameSystem.Player
                 activePlayer = Instantiate(playerPrefab);
                 activePlayer.playerTransform.position = spawn.transform.position;
                 activePlayer.playerTransform.rotation = spawn.transform.rotation;
+                // activePlayer.playerTransform.GetComponent<PlayerInput>().uiInputModule = uiInput;
             }
         }
     }

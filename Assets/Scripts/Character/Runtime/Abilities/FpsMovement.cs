@@ -6,9 +6,9 @@ namespace Simpson.Character.Abilities
 {
     public class FpsMovement : CharacterAbility
     {
-        private InputAction move;
-        private InputAction look;
-        private InputAction toggle;
+        private Vector2 move;
+        private Vector2 look;
+        // private InputAction toggle;
         public float turnAcceleration = 10f;
 
         [SerializeField] private CinemachineVirtualCamera defaultCam;
@@ -20,16 +20,32 @@ namespace Simpson.Character.Abilities
         
         public override void Init()
         {
-            move = CharacterStateManager.PlayerInput.actions.FindAction("Move");
-            look = CharacterStateManager.PlayerInput.actions.FindAction("Look");
-            toggle = CharacterStateManager.PlayerInput.actions.FindAction("ToggleFp");
-            toggle.performed += c =>
-            {
-                toggleActivated = !Active;
-                stopActivated = Active;
-            };
+            // move = CharacterStateManager.PlayerInput.actions.FindAction("Move");
+            // look = CharacterStateManager.PlayerInput.actions.FindAction("Look");
+            // toggle = CharacterStateManager.PlayerInput.actions.FindAction("ToggleFp");
+            // toggle.performed += c =>
+            // {
+            //     toggleActivated = !Active;
+            //     stopActivated = Active;
+            // };
         }
 
+        private void OnMove(InputValue value)
+        {
+            move = value.Get<Vector2>();
+        }
+        
+        private void OnLook(InputValue value)
+        {
+            look = value.Get<Vector2>();
+        }
+
+        private void OnToggleFp(InputValue value)
+        {
+            toggleActivated = !Active;
+            stopActivated = Active;
+        }
+        
         public override void OnStart()
         {
             aimCam.Priority = 11;
@@ -56,12 +72,12 @@ namespace Simpson.Character.Abilities
         public override void UpdateCharacter()
         {
             toggleActivated = false;
-            var moveDir = move.ReadValue<Vector2>();
+            var moveDir = move;
             
             CharacterStateManager.Animator.SetFloat("Forward", moveDir.y);
             CharacterStateManager.Animator.SetFloat("Side", moveDir.x);
             
-            var lookVector = look.ReadValue<Vector2>();
+            var lookVector = look;
             var currentRot = Vector3.SignedAngle(Vector3.forward, CharacterStateManager.transform.forward, Vector3.up);
             // var currentPitch = Vector3.SignedAngle(Vector3.up, aimCam.transform.up, Vector3.right);
             if (lookVector.sqrMagnitude >= 0.01f)

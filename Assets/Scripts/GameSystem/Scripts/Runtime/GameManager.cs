@@ -207,6 +207,7 @@ namespace GameSystem
         {
             Time.timeScale = 0;
             actions.actionMaps[0].Disable();
+            actions.actionMaps[1].Enable();
             Paused = true;
             SetCursorState();
         }
@@ -215,6 +216,7 @@ namespace GameSystem
         {
             Time.timeScale = 1;
             actions.actionMaps[0].Enable();
+            actions.actionMaps[1].Enable();
             Paused = false;
             SetCursorState();
         }

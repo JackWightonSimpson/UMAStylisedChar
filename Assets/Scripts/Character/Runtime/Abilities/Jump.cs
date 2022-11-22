@@ -7,22 +7,26 @@ namespace Simpson.Character.Abilities
     {
         [SerializeField]
         private float jumpHeight = 1.5f;
-        private InputAction jump;
+        // private InputAction jump;
+        [SerializeField]
         private bool doJump;
+        [SerializeField]
+        private bool startJump;
         [SerializeField]
         private Vector3 targetV;
         
         public override void Init()
         {
-            jump = CharacterStateManager.PlayerInput.actions.FindAction("Jump");
+            // jump = CharacterStateManager.PlayerInput.actions.FindAction("Jump");
             // jump.performed += (c) =>
             // {
-            //     if (Active)
-            //     {
-            //         targetV = CharacterStateManager.LastVelocity;
-            //         CharacterStateManager.Animator.SetTrigger("Jump");
-            //     }
+            //     startJump = true;
             // };
+        }
+
+        private void OnJump(InputValue value)
+        {
+            startJump = true;
         }
         
         public override void OnStart()
@@ -40,7 +44,7 @@ namespace Simpson.Character.Abilities
         public override bool CanStart()
         {
             // doJump = true;
-            return CharacterStateManager.Grounded && jump.IsPressed();
+            return CharacterStateManager.Grounded && startJump;
         }
 
         public override bool CanStop()
@@ -61,13 +65,14 @@ namespace Simpson.Character.Abilities
                 CharacterStateManager.NextVelocity -= CharacterStateManager.NextVelocity.y * Vector3.up;
                 CharacterStateManager.NextVelocity += Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y) * Vector3.up;
                 targetV = CharacterStateManager.NextVelocity;
-                CharacterStateManager.state.FallTimeout = 0;
+                CharacterStateManager.state.fallTimeout = 0;
                 doJump = false;
             }
         }
 
         public override void Cleanup()
         {
+            startJump = false;
         }
 
         private void Jump_StartJump()

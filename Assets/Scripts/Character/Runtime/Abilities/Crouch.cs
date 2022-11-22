@@ -1,14 +1,20 @@
-﻿using UnityEngine.InputSystem;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Simpson.Character.Abilities
 {
     public class Crouch : CharacterAbility
     {
-        private InputAction action;     
+        [SerializeField] private bool shouldCrouch;
         
         public override void Init()
         {
-            action = CharacterStateManager.PlayerInput.actions.FindAction("Crouch");
+            // action = CharacterStateManager.PlayerInput.actions.FindAction("Crouch");
+        }
+
+        private void OnCrouch(InputValue value)
+        {
+            shouldCrouch = !shouldCrouch;
         }
         
         public override void OnStart()
@@ -23,12 +29,12 @@ namespace Simpson.Character.Abilities
 
         public override bool CanStart()
         {
-            return CharacterStateManager.Grounded && action.IsPressed();
+            return CharacterStateManager.Grounded && shouldCrouch;
         }
 
         public override bool CanStop()
         {
-            return !action.IsPressed() || !CharacterStateManager.Grounded;
+            return !shouldCrouch || !CharacterStateManager.Grounded;
         }
 
         public override void UpdateCharacter()

@@ -49,7 +49,7 @@ namespace Simpson.Character
         [field:SerializeField] 
         public Animator Animator { get; private set; }
 
-        private InputAction move;
+        private Vector2 move;
         
 
         public bool Swimming => false;
@@ -92,7 +92,7 @@ namespace Simpson.Character
                 cameraTransform = Camera.main.transform;
             }
 
-            move = PlayerInput.actions.FindAction("Move");
+            // move = PlayerInput.actions.FindAction("Move");
         }
 
         private void Start()
@@ -110,7 +110,7 @@ namespace Simpson.Character
         private void OnEnable()
         {
             SetupStates();
-            move = PlayerInput.actions.FindAction("Move");
+            // move = PlayerInput.actions.FindAction("Move");
         }
         
         private void SetupStates()
@@ -155,7 +155,7 @@ namespace Simpson.Character
             if (Grounded)
             {
                 // reset the fall timeout timer
-                state.fallTimeoutDelta = state.FallTimeout;
+                state.fallTimeoutDelta = state.fallTimeout;
                 Animator.SetBool("falling", false);
                 Controller.stepOffset = 0.3f;
                 state.LastVelocity = new Vector3(LastVelocity.x,Mathf.Max(-2f, LastVelocity.y), LastVelocity.z);
@@ -194,7 +194,7 @@ namespace Simpson.Character
             }
 
             
-            var moveDir = move.ReadValue<Vector2>();
+            var moveDir = move;//.ReadValue<Vector2>();
             Animator.SetFloat("Forward",moveDir.magnitude/Math.Max(1f,moveDir.magnitude));
             Animator.SetFloat("Side", 0f);
             Animator.SetFloat("Move", moveDir.magnitude/Math.Max(1f,moveDir.magnitude));
@@ -247,6 +247,7 @@ namespace Simpson.Character
             {
                 characterAbility.Cleanup();
             }
+            // move = Vector2.zero;
         }
 
         #region events/animation
@@ -254,6 +255,12 @@ namespace Simpson.Character
         private void OnAnimatorMove ()
         {
             state.RootMotionMove += this.Animator.deltaPosition;
+        }
+
+        private void OnMove(InputValue value)
+        {
+            move = value.Get<Vector2>();
+            Debug.Log(move);
         }
 
         private void AddMoveConfig(MovementConfig config)
@@ -282,13 +289,18 @@ namespace Simpson.Character
 
         private void OnDrawGizmosSelected()
         {
-            Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
-            Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
+#if UNITY_EDITOR
+            if (Controller == null)
+            {
+                Controller = GetComponent<CharacterController>();
+            }
+#endif
+            var transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
+            var transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-            if (Grounded) Gizmos.color = transparentGreen;
-            else Gizmos.color = transparentRed;
+            Gizmos.color = Grounded ? transparentGreen : transparentRed;
 			
-            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y + Controller.radius + GroundCheckOffset, transform.position.z);
+            var spherePosition = new Vector3(transform.position.x, transform.position.y + Controller.radius + GroundCheckOffset, transform.position.z);
             
             Gizmos.DrawSphere(spherePosition, Controller.radius + GroundCheckRadius);
             
@@ -357,13 +369,8 @@ namespace Simpson.Character
             [field:SerializeField] 
             public string ActiveAbilityName { get; set; }
             
-            [Tooltip("The height the player can jump")]
-            public float JumpHeight = 1.2f;
-            [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-            public float Gravity = -15.0f;
-            [Space(10)]
             [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
-            public float FallTimeout = 0.15f;
+            public float fallTimeout = 0.15f;
             public float fallTimeoutDelta;
         }
     }

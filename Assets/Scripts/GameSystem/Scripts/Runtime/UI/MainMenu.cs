@@ -36,7 +36,6 @@ namespace GameSystem.UI
                 {
                     menuParent.SetActive(false);
                 }
-
                 triggerAction.action.performed += ShowMenu;
                 continueButton.gameObject.SetActive(!gameScene); //TODO save
                 newGameButton.gameObject.SetActive(!gameScene);
@@ -58,16 +57,19 @@ namespace GameSystem.UI
 
         public void ShowMenu()
         {
+            Debug.Log("Menu");
             var gameScene = GameManager.Instance.IsGameScene(gameObject.scene.buildIndex);
             if (gameScene && menuParent.activeSelf)
             {
                 GameManager.Instance.UnpauseGame();
                 menuParent.SetActive(false);
+                Debug.Log("Hide");
             }
             else
             {
                 GameManager.Instance.PauseGame();
                 menuParent.SetActive(true);
+                Debug.Log("Show");
             }
         }
 

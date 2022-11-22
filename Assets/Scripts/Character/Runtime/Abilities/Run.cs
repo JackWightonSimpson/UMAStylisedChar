@@ -4,11 +4,16 @@ namespace Simpson.Character.Abilities
 {
     public class Run : CharacterAbility
     {
-        private InputAction attack;     
+        private bool run;     
         
         public override void Init()
         {
-            attack = CharacterStateManager.PlayerInput.actions.FindAction("Sprint");
+            // attack = CharacterStateManager.PlayerInput.actions.FindAction("Sprint");
+        }
+        
+        private void OnSprint(InputValue value)
+        {
+            run = value.isPressed;
         }
         
         public override void OnStart()
@@ -23,12 +28,12 @@ namespace Simpson.Character.Abilities
 
         public override bool CanStart()
         {
-            return CharacterStateManager.Grounded && attack.IsPressed();
+            return CharacterStateManager.Grounded && run;
         }
 
         public override bool CanStop()
         {
-            return !attack.IsPressed() || !CharacterStateManager.Grounded;
+            return !run || !CharacterStateManager.Grounded;
         }
 
         public override void UpdateCharacter()

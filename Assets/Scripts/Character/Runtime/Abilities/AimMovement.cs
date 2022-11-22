@@ -6,8 +6,8 @@ namespace Simpson.Character.Abilities
 {
     public class AimMovement : CharacterAbility
     {
-        private InputAction move;
-        private InputAction aim;
+        private Vector2 move;
+        private bool aim;
         public float turnAcceleration = 10f;
 
         [SerializeField] private CinemachineVirtualCamera defaultCam;
@@ -15,8 +15,17 @@ namespace Simpson.Character.Abilities
         
         public override void Init()
         {
-            move = CharacterStateManager.PlayerInput.actions.FindAction("Move");
-            aim = CharacterStateManager.PlayerInput.actions.FindAction("Aim");
+            // aim = CharacterStateManager.PlayerInput.actions.FindAction("Aim");
+        }
+
+        private void OnAim(InputValue value)
+        {
+            aim = value.isPressed;
+        }
+        
+        private void OnMove(InputValue value)
+        {
+            move = value.Get<Vector2>();
         }
 
         public override void OnStart()
@@ -29,22 +38,21 @@ namespace Simpson.Character.Abilities
         {
             aimCam.Priority = 9;
             defaultCam.Priority = 11;
-            CharacterStateManager.Animator.SetFloat("Move", 0f);
         }
 
         public override bool CanStart()
         {
-            return CharacterStateManager.Grounded && aim.IsPressed();
+            return CharacterStateManager.Grounded && aim;
         }
 
         public override bool CanStop()
         {
-            return !CharacterStateManager.Grounded || !aim.IsPressed();
+            return !CharacterStateManager.Grounded || !aim;
         }
 
         public override void UpdateCharacter()
         {
-            var moveDir = move.ReadValue<Vector2>();
+            var moveDir = move;
             var xForm = transform;
             CharacterStateManager.Animator.SetFloat("Forward", moveDir.y);
             CharacterStateManager.Animator.SetFloat("Side", moveDir.x);

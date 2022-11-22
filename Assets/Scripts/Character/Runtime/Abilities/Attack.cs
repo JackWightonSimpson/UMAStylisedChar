@@ -6,7 +6,7 @@ namespace Simpson.Character.Abilities
 {
     public class Attack : CharacterAbility
     {
-        private InputAction attack;     
+        private bool attack;
         
         [SerializeField] private List<Hitbox> hitBoxes = new List<Hitbox>();
 
@@ -27,7 +27,12 @@ namespace Simpson.Character.Abilities
         
         public override void Init()
         {
-            attack = CharacterStateManager.PlayerInput.actions.FindAction("Attack");
+            // attack = CharacterStateManager.PlayerInput.actions.FindAction("Attack");
+        }
+
+        public void OnAttack(InputValue value)
+        {
+            attack = value.isPressed;
         }
         
         public override void OnStart()
@@ -42,12 +47,12 @@ namespace Simpson.Character.Abilities
 
         public override bool CanStart()
         {
-            return CharacterStateManager.Grounded && attack.IsPressed();
+            return CharacterStateManager.Grounded && attack;
         }
 
         public override bool CanStop()
         {
-            return  !attack.IsPressed()  || !CharacterStateManager.Grounded;
+            return true;// !attack.IsPressed()  || !CharacterStateManager.Grounded;
         }
 
         public override void UpdateCharacter()
