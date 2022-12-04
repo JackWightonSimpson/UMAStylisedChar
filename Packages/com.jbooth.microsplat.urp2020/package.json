@@ -1,0 +1,28 @@
+{
+  "name": "com.jbooth.microsplat.urp2020",
+  "displayName": "MicroSplat-CoreURP2020",
+  "version": "3.9.0",
+  "author": {
+    "name": "Jason Booth",
+    "email": "slipster216@gmail.com",
+    "url": "http://jdbtechservices.com/"
+  },
+  "unity": "2020.3",
+  "samples": [
+    {
+      "displayName": "URP2020 Example",
+      "description": "Example of URP2020",
+      "path": "Samples~/URP2020"
+    }
+  ],
+  "dependencies": {
+    "com.jbooth.microsplat.core": "3.9.0"
+  },
+  "description": "The URP2020 module for MicroSplat allows MicroSplat to compile it's shaders for URP 10.x in Unity 2020LTS",
+  "keywords": [
+    "MicroSplat",
+    "Terrain",
+    "Shader"
+  ],
+  "documentationUrl": "https://docs.google.com/document/d/1i29Tp5WcsFcIHCVgWV4rSnjgpw1kyENaVSSkHhgu0ro/edit?usp=sharing"
+}
