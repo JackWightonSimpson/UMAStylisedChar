@@ -15,8 +15,8 @@ namespace GameSystem.Player
         [SerializeField] private SaveablePlayer playerPrefab;
 
         [SerializeField] private InputSystemUIInputModule uiInput;
-
-        private SaveablePlayer activePlayer;
+        
+        public SaveablePlayer activePlayer;
         private string targetSpawnId = "default";
         
         protected override void OnAwake()

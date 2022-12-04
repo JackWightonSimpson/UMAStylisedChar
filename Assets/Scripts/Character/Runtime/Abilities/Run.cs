@@ -13,7 +13,7 @@ namespace Simpson.Character.Abilities
         
         private void OnSprint(InputValue value)
         {
-            run = value.isPressed;
+            run = !run;//value.isPressed;
         }
         
         public override void OnStart()

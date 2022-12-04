@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Simpson.Character.Abilities
 {
-    public class AimMovement : CharacterAbility
+    public class ForwardMovement : CharacterAbility
     {
         private Vector2 move;
         private bool aim;
@@ -30,37 +30,38 @@ namespace Simpson.Character.Abilities
 
         public override void OnStart()
         {
-            aimCam.Priority = 11;
-            defaultCam.Priority = 9;
+            // aimCam.Priority = 11;
+            // defaultCam.Priority = 9;
         }
 
         public override void OnStop()
         {
-            aimCam.Priority = 9;
-            defaultCam.Priority = 11;
+            // aimCam.Priority = 9;
+            // defaultCam.Priority = 11;
         }
 
         public override bool CanStart()
         {
-            return CharacterStateManager.Grounded && aim;
+            return true;//CharacterStateManager.Grounded && aim;
         }
 
         public override bool CanStop()
         {
-            return !CharacterStateManager.Grounded || !aim;
+            return false;//!CharacterStateManager.Grounded;
         }
 
         public override void UpdateCharacter()
         {
-            var moveDir = move;
-            var xForm = transform;
-            CharacterStateManager.Animator.SetFloat("Forward", moveDir.y);
-            CharacterStateManager.Animator.SetFloat("Side", moveDir.x);
+            // var moveDir = move;
+            // var xForm = transform;
+            CharacterStateManager.Animator.SetFloat("Forward", 1);
+            CharacterStateManager.Animator.SetFloat("Side", 0);
+            CharacterStateManager.Animator.SetFloat("Move", 1);
             
-                
-            var targetRot = Vector3.SignedAngle(Vector3.forward, CharacterStateManager.cameraTransform.forward, Vector3.up);
-            CharacterStateManager.NextOrientation =
-                Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,targetRot,0), turnAcceleration * Time.deltaTime);
+            //     
+            // var targetRot = Vector3.SignedAngle(Vector3.forward, CharacterStateManager.cameraTransform.forward, Vector3.up);
+            // CharacterStateManager.NextOrientation =
+            //     Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,targetRot,0), turnAcceleration * Time.deltaTime);
             
         }
 

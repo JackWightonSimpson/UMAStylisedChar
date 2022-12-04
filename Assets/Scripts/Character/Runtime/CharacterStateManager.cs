@@ -50,8 +50,11 @@ namespace Simpson.Character
         public Animator Animator { get; private set; }
 
         private Vector2 move;
-        
 
+
+        [SerializeField]
+        private bool lockY;
+        
         public bool Swimming => false;
         
         public bool CanFall => activeConfig.CanFall;
@@ -157,7 +160,7 @@ namespace Simpson.Character
                 // reset the fall timeout timer
                 state.fallTimeoutDelta = state.fallTimeout;
                 Animator.SetBool("falling", false);
-                Controller.stepOffset = 0.3f;
+                Controller.stepOffset = 0.32f;
                 state.LastVelocity = new Vector3(LastVelocity.x,Mathf.Max(-2f, LastVelocity.y), LastVelocity.z);
             }
             else
@@ -183,15 +186,7 @@ namespace Simpson.Character
             NextVelocity = Vector3.zero;
             
             GroundedCheck();
-            
-            foreach (var characterAbility in abilities)
-            {
-                characterAbility.TryStop();
-            }
-            foreach (var characterAbility in abilities)
-            {
-                characterAbility.TryStart();
-            }
+
 
             
             var moveDir = move;//.ReadValue<Vector2>();
@@ -210,7 +205,15 @@ namespace Simpson.Character
             
             if (activeConfig.UseRootMotion)
             {
-                NextVelocity = RootMotionMove / Time.deltaTime;
+                if (lockY)
+                {
+                    NextVelocity = (RootMotionMove -RootMotionMove.y * Vector3.up)/ Time.deltaTime;
+                }
+                else
+                {
+                    NextVelocity = (RootMotionMove )/ Time.deltaTime;
+                }
+                NextVelocity = (RootMotionMove -RootMotionMove.y * Vector3.up)/ Time.deltaTime;
                 NextVelocity += LastVelocity.y * Vector3.up;
             }
             else
@@ -242,7 +245,15 @@ namespace Simpson.Character
             Animator.SetFloat("verticalSpeed",Vector3.Dot(NextVelocity, transform.up));
             state.LastOrientation = transform.localRotation;
             state.RootMotionMove = Vector3.zero;
-            
+                        
+            foreach (var characterAbility in abilities)
+            {
+                characterAbility.TryStop();
+            }
+            foreach (var characterAbility in abilities)
+            {
+                characterAbility.TryStart();
+            }
             foreach (var characterAbility in abilities)
             {
                 characterAbility.Cleanup();
@@ -260,7 +271,6 @@ namespace Simpson.Character
         private void OnMove(InputValue value)
         {
             move = value.Get<Vector2>();
-            Debug.Log(move);
         }
 
         private void AddMoveConfig(MovementConfig config)
@@ -282,6 +292,10 @@ namespace Simpson.Character
         void Land() {}
         
         void Hit() {}
+
+        void PlayStep()
+        {
+        }
 
         #endregion
         

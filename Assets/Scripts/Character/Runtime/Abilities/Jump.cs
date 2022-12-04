@@ -15,6 +15,7 @@ namespace Simpson.Character.Abilities
         [SerializeField]
         private Vector3 targetV;
         
+        [SerializeField] private bool useEvent = true;
         public override void Init()
         {
             // jump = CharacterStateManager.PlayerInput.actions.FindAction("Jump");
@@ -33,6 +34,10 @@ namespace Simpson.Character.Abilities
         {
             targetV = CharacterStateManager.LastVelocity;
             CharacterStateManager.Animator.SetTrigger("Jump");
+            if (!useEvent)
+            {
+                Jump_StartJump();
+            }
         }
 
         public override void OnStop()

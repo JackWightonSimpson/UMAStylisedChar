@@ -33,6 +33,10 @@ namespace GameSystem.UI
                 Destroy(slotParent.GetChild(i).gameObject);
             }
 
+            if (SaveManager.Instance == null)
+            {
+                return;
+            }
             foreach (var save in SaveManager.Instance.ListSaves())
             {
                 var slot = Instantiate(slotPrefab, slotParent);

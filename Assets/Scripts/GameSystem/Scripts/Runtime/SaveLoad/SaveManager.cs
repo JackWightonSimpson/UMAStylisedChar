@@ -98,7 +98,14 @@ namespace GameSystem.SaveLoad
                     continue;
                 }
                 LoadObject(aSaveable);
-                ids.Add(aSaveable.ID, aSaveable.transform);
+                if (!ids.ContainsKey(aSaveable.ID))
+                {
+                    ids.Add(aSaveable.ID, aSaveable.transform);
+                }
+                else
+                {
+                    Debug.LogWarning($"Save dupe {aSaveable.name}");
+                }
             }
             
             if (sceneStates.TryGetValue(sceneIndex, out var sceneState))

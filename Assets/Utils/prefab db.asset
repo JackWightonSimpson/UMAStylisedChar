@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: prefab db
   m_EditorClassIdentifier: 
   prefabData:
-    rawData: []
-  databaseSize: 0
+    rawData:
+    - key: c56f27f5-df6b-4481-86f5-d25cee7d652e
+      value: Assets/Ai/Chomper
+    - key: 8eede7eb-25cd-46c0-8636-4437c1866728
+      value: Assets/Character/Chomper
+    - key: 004834c1-e841-4e35-9299-33e15634ec83
+      value: Assets/Character/female_base
+  databaseSize: 3
