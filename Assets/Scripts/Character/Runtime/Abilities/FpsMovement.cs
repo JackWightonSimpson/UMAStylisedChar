@@ -13,7 +13,7 @@ namespace Simpson.Character.Abilities
 
         [SerializeField] private CinemachineVirtualCamera defaultCam;
         [SerializeField] private CinemachineVirtualCamera aimCam;
-        [SerializeField] private Transform camTarget;
+        [SerializeField] private Transform camPivot;
 
         public bool toggleActivated = false;
         public bool stopActivated = false;
@@ -79,19 +79,25 @@ namespace Simpson.Character.Abilities
             
             var lookVector = look;
             var currentRot = Vector3.SignedAngle(Vector3.forward, CharacterStateManager.transform.forward, Vector3.up);
-            // var currentPitch = Vector3.SignedAngle(Vector3.up, aimCam.transform.up, Vector3.right);
+            var currentPitch = camPivot.localRotation.eulerAngles.x;
+            if (currentPitch > 180)
+            {
+                currentPitch = currentPitch -360;
+            }
             if (lookVector.sqrMagnitude >= 0.01f)
             {
                 currentRot += lookVector.x * turnAcceleration;
-                // currentPitch += lookVector.y * turnAcceleration;
+                currentPitch += lookVector.y * turnAcceleration;
             }
 
             // clamp our rotations so our values are limited 360 degrees
             currentRot = ClampAngle(currentRot, float.MinValue, float.MaxValue);
+            currentPitch = ClampAngle(currentPitch, -90, 120);
 
             CharacterStateManager.NextOrientation =
                 Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,currentRot,0), CharacterStateManager.activeConfig.TurnAcceleration * Time.deltaTime);
             
+            camPivot.localRotation = Quaternion.Euler(currentPitch,0,0);
             
             // aimCam.transform.rotation =
             //     Quaternion.Slerp(aimCam.transform.rotation,Quaternion.Euler(currentPitch,0,0), turnAcceleration * Time.deltaTime);

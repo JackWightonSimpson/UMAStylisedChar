@@ -100,14 +100,14 @@ MonoBehaviour:
   sourceTextures:
   - terrainLayer: {fileID: 8574412962073106934, guid: a23f993ffbc9ba94b8f287c764b0d88a,
       type: 2}
-    diffuse: {fileID: 2800000, guid: b3f3180da462827459cb1c108581d919, type: 3}
-    height: {fileID: 0}
+    diffuse: {fileID: 2800000, guid: 28649ccd990f6c64d80dd31cb2f07bee, type: 3}
+    height: {fileID: 2800000, guid: cacb445f7c1a5664ea755a73993eb0c6, type: 3}
     heightChannel: 2
-    normal: {fileID: 0}
-    smoothness: {fileID: 0}
+    normal: {fileID: 2800000, guid: 8802f168d223a5f4c850391211967c1b, type: 3}
+    smoothness: {fileID: 2800000, guid: 34fac9a409674884585c8cf531cf866a, type: 3}
     smoothnessChannel: 3
     isRoughness: 0
-    ao: {fileID: 0}
+    ao: {fileID: 2800000, guid: 28649ccd990f6c64d80dd31cb2f07bee, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
@@ -130,14 +130,14 @@ MonoBehaviour:
     splat: {fileID: 0}
   - terrainLayer: {fileID: 8574412962073106934, guid: d1c01dfa7d12ae142aca1a55dc922fac,
       type: 2}
-    diffuse: {fileID: 2800000, guid: 699bdf6be4304094db33dda64e887b3b, type: 3}
-    height: {fileID: 0}
+    diffuse: {fileID: 2800000, guid: 500ee222e323e0049b8924f838b4bdd8, type: 3}
+    height: {fileID: 2800000, guid: 9a51cbb490f6582438d04280d1d789a0, type: 3}
     heightChannel: 2
-    normal: {fileID: 2800000, guid: 41c380f842c2c8c4a8368c56a5adc504, type: 3}
-    smoothness: {fileID: 0}
+    normal: {fileID: 2800000, guid: 074133743ac34ab47a2da3fb0a777160, type: 3}
+    smoothness: {fileID: 2800000, guid: 0ee8bf7bb27b23b448acb6fdeb7b3045, type: 3}
     smoothnessChannel: 3
     isRoughness: 0
-    ao: {fileID: 0}
+    ao: {fileID: 2800000, guid: 187e57901695f6744b7d7394c6f5600e, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
@@ -160,14 +160,14 @@ MonoBehaviour:
     splat: {fileID: 0}
   - terrainLayer: {fileID: 8574412962073106934, guid: 34a79d5876d83b24297c3d9a7bb7370b,
       type: 2}
-    diffuse: {fileID: 2800000, guid: 91e362541b37fe947a8296386e22344f, type: 3}
-    height: {fileID: 0}
+    diffuse: {fileID: 2800000, guid: 4b52339c2801c6e478b289eed6188b2a, type: 3}
+    height: {fileID: 2800000, guid: ce42aa990cb8e384aae64a41aee09d51, type: 3}
     heightChannel: 2
-    normal: {fileID: 2800000, guid: f7627922db039884e849d99b8aaf3e92, type: 3}
-    smoothness: {fileID: 0}
+    normal: {fileID: 2800000, guid: ada7c5c41d9409b44b2115c16c417271, type: 3}
+    smoothness: {fileID: 2800000, guid: 0aae13d0d58746e4d88d601e5bff7e74, type: 3}
     smoothnessChannel: 3
     isRoughness: 0
-    ao: {fileID: 0}
+    ao: {fileID: 2800000, guid: 1bf7f8ccc04a9934bb0edebc971f4165, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
@@ -190,14 +190,14 @@ MonoBehaviour:
     splat: {fileID: 0}
   - terrainLayer: {fileID: 8574412962073106934, guid: f2dcb81e9aa537341bf54958ddd272ab,
       type: 2}
-    diffuse: {fileID: 2800000, guid: a1c3b24e2eec2e8459f83b5015b7cc42, type: 3}
-    height: {fileID: 0}
+    diffuse: {fileID: 2800000, guid: a33a3931769aa2b4abb5cca97841cabc, type: 3}
+    height: {fileID: 2800000, guid: c3f1a622618821b4dac724dc84c1e9ee, type: 3}
     heightChannel: 2
-    normal: {fileID: 2800000, guid: b5dd83b25006ebf4c950b7b4ab889679, type: 3}
-    smoothness: {fileID: 0}
+    normal: {fileID: 2800000, guid: 405c0de6294d6ad4fb473d7a0fbeae09, type: 3}
+    smoothness: {fileID: 2800000, guid: 9ef223e9ca9bff649a17569c7c342507, type: 3}
     smoothnessChannel: 3
     isRoughness: 0
-    ao: {fileID: 0}
+    ao: {fileID: 2800000, guid: 39576ceb09d82a14c84863749eeb7c8f, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
