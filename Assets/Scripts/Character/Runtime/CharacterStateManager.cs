@@ -50,6 +50,7 @@ namespace Simpson.Character
         public Animator Animator { get; private set; }
 
         private Vector2 move;
+        public Vector3 push;
 
 
         [SerializeField]
@@ -235,7 +236,8 @@ namespace Simpson.Character
                 NextVelocity += Physics.gravity * Time.deltaTime;
             }
 
-            
+            NextVelocity += push;
+            push = Vector3.zero;
             Controller.Move(NextVelocity * Time.deltaTime);
             state.LastVelocity = NextVelocity;
             transform.localRotation = NextOrientation;
@@ -295,6 +297,15 @@ namespace Simpson.Character
 
         void PlayStep()
         {
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (hit.gameObject.TryGetComponent<CharacterStateManager>(out var ctr))
+            {
+                push += hit.normal*0.1f;
+                // ctr.push -= hit.normal*0.1f;
+            }
         }
 
         #endregion

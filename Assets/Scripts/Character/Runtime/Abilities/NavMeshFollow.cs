@@ -34,12 +34,12 @@ namespace Simpson.Character.Abilities
 
         public override bool CanStart()
         {
-            return agent.isActiveAndEnabled;
+            return agent.isActiveAndEnabled && !agent.isStopped;
         }
 
         public override bool CanStop()
         {
-            return !agent.isActiveAndEnabled;
+            return !agent.isActiveAndEnabled || agent.isStopped;
         }
 
         public override void UpdateCharacter()

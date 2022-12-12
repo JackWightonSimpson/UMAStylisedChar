@@ -23,13 +23,24 @@ namespace Simpson.Character.Abilities
         
         [SerializeField]
         private float hitForce = 20f;
+        [SerializeField]
+        private float hitDamage = 10f;
         
         
         public override void Init()
         {
             // attack = CharacterStateManager.PlayerInput.actions.FindAction("Attack");
         }
-
+        
+        public void OnAttack(bool trigger)
+        {
+            attack = trigger;
+            if (Active)
+            {
+                CharacterStateManager.Animator.SetTrigger("Attack");
+            }
+        }
+        
         public void OnAttack(InputValue value)
         {
             attack = value.isPressed;
@@ -78,6 +89,7 @@ namespace Simpson.Character.Abilities
                     Debug.Log("Pushing: "+collider.gameObject.name);
                     rb.AddForce(transform.forward*hitForce);
                 }
+                collider.gameObject.SendMessage("OnDamaged", hitDamage);
             }
         }
         

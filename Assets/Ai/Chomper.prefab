@@ -1347,7 +1347,13 @@ GameObject:
   - component: {fileID: 4496181836048957734}
   - component: {fileID: 7976756635813172655}
   - component: {fileID: 7047955635144191898}
+  - component: {fileID: 6720930451095250706}
+  - component: {fileID: 1092676768829903673}
   - component: {fileID: 496271519833641897}
+  - component: {fileID: 5434468142692139139}
+  - component: {fileID: 3836039171906702127}
+  - component: {fileID: 6652357137563119562}
+  - component: {fileID: 4096525482031008552}
   m_Layer: 6
   m_Name: Chomper
   m_TagString: Untagged
@@ -1445,6 +1451,7 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 8485781730754986361}
   <PlayerInput>k__BackingField: {fileID: 0}
   <Animator>k__BackingField: {fileID: 0}
+  lockY: 0
   <Grounded>k__BackingField: 0
   <GroundNormal>k__BackingField: {x: 0, y: 1, z: 0}
 --- !u!114 &6242122375079655406
@@ -1485,6 +1492,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   attacking: 0
   hitForce: 1000
+  hitDamage: 10
 --- !u!114 &8998960696501312082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,7 +1555,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 0.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1571,6 +1579,43 @@ MonoBehaviour:
   <Active>k__BackingField: 0
   agent: {fileID: 7976756635813172655}
   speedAdjust: 1.6
+--- !u!114 &6720930451095250706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152579316897606773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e5e9d3f8db4b3a91d7b80651c21e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetsMark:
+    serializedVersion: 2
+    m_Bits: 64
+  detectRadius: 6
+  targets: []
+  behaviours: []
+  active: {fileID: 0}
+  patrolOrigin: {x: 0, y: 0, z: 0}
+--- !u!114 &1092676768829903673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152579316897606773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a165d12b36e04f0ebf96c6c56901bcd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  brain: {fileID: 0}
+  followDistance: 1.5
+  ticks: 2
+  timer: 0
 --- !u!114 &496271519833641897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,7 +1628,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b71b7b6984a447dbe8520235297639f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navUpdate: 5
+  ticks: 0
+  start: {x: 0, y: 0, z: 0}
+  followDistance: 10
   agent: {fileID: 0}
+  brain: {fileID: 0}
+--- !u!114 &5434468142692139139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152579316897606773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4d03d92a604ea6bf847c632e553718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  brain: {fileID: 0}
+  followDistance: 10
+  endDistance: 2
+--- !u!114 &3836039171906702127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152579316897606773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44b3e3d7ff44fb58d6a3483b7de038d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 2
+  max: 10
+  agent: {fileID: 0}
+  brain: {fileID: 0}
+--- !u!114 &6652357137563119562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152579316897606773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267f09554c8244d0af185cef81470d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ScenePath>k__BackingField: []
+  <ID>k__BackingField: 61e987d8-7ce0-42e4-bcfd-6396cb20d798
+  <Singleton>k__BackingField: 0
+  <PrefabId>k__BackingField: 61e987d8-7ce0-42e4-bcfd-6396cb20d798
+  <PrefabPath>k__BackingField: 
+--- !u!114 &4096525482031008552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152579316897606773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71d6c1f01f8482db116aab56e8a9cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  cooldown: 2
+  time: 2
+  threshold: 5
+  animator: {fileID: 0}
 --- !u!1 &7152579316897606775
 GameObject:
   m_ObjectHideFlags: 0
