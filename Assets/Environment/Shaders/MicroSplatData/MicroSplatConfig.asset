@@ -99,14 +99,14 @@ MonoBehaviour:
   allTextureChannelAO: 1
   sourceTextures:
   - terrainLayer: {fileID: 0}
-    diffuse: {fileID: 2800000, guid: e32fd7d42eb0b4040a2d43fc236984b2, type: 3}
-    height: {fileID: 2800000, guid: 21451fbb22351c44d9319dd207f2b7fc, type: 3}
+    diffuse: {fileID: 2800000, guid: d344ce540db0ccb47a06fe54f7d8b7ef, type: 3}
+    height: {fileID: 2800000, guid: 6d097279067edb14a8dedeb07be45ab0, type: 3}
     heightChannel: 1
-    normal: {fileID: 2800000, guid: ba7304ac8225c86438628dc5f054189c, type: 3}
-    smoothness: {fileID: 2800000, guid: bf8b690a6988a1b4aba8c9bddf76f16b, type: 3}
+    normal: {fileID: 2800000, guid: fa1f9bc4b841125438b5ac86c34393f3, type: 3}
+    smoothness: {fileID: 2800000, guid: c006fce4ebfa22547a9b642d0ef7c7de, type: 3}
     smoothnessChannel: 1
     isRoughness: 0
-    ao: {fileID: 2800000, guid: 46840ce6c5ecf574588e70b01ae7fefd, type: 3}
+    ao: {fileID: 2800000, guid: e69a8492bd685984f8a03cd5ba8b6a71, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
@@ -128,14 +128,14 @@ MonoBehaviour:
     traxAOChannel: 1
     splat: {fileID: 0}
   - terrainLayer: {fileID: 0}
-    diffuse: {fileID: 2800000, guid: 8b1426e8f49d4ab41a98b37f24ea3553, type: 3}
-    height: {fileID: 2800000, guid: 6de9511f76184af4fa690047e15a05f7, type: 3}
+    diffuse: {fileID: 2800000, guid: 8d38d958f421e524489fcdffe2f126ae, type: 3}
+    height: {fileID: 2800000, guid: 8d38d958f421e524489fcdffe2f126ae, type: 3}
     heightChannel: 1
-    normal: {fileID: 2800000, guid: 9e93a7696a4efde48a59e69c047260ad, type: 3}
-    smoothness: {fileID: 2800000, guid: a8f68ddb68f605344bc32a3f632dd310, type: 3}
+    normal: {fileID: 2800000, guid: 63dda37c610762f4b8a2d977f240035a, type: 3}
+    smoothness: {fileID: 2800000, guid: f588e08f8580bfb40a86b790042f31b6, type: 3}
     smoothnessChannel: 1
     isRoughness: 0
-    ao: {fileID: 2800000, guid: 39f7b1fcf151ffd4a81aff21b9eaf922, type: 3}
+    ao: {fileID: 2800000, guid: 0351a8d4204418e4096dc9d5c2e8f006, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
@@ -157,14 +157,14 @@ MonoBehaviour:
     traxAOChannel: 1
     splat: {fileID: 0}
   - terrainLayer: {fileID: 0}
-    diffuse: {fileID: 2800000, guid: 9a06a8a1a677c094d82e6ba6f4853d4c, type: 3}
-    height: {fileID: 2800000, guid: c900d6a2e68f73d4da00badb55ee7b05, type: 3}
+    diffuse: {fileID: 2800000, guid: a1c3b24e2eec2e8459f83b5015b7cc42, type: 3}
+    height: {fileID: 2800000, guid: 20a98d33c61d29b4497f46f6fb0e4fc7, type: 3}
     heightChannel: 1
-    normal: {fileID: 2800000, guid: 911e40ffa09587f49bddb02a4be1d3fb, type: 3}
-    smoothness: {fileID: 2800000, guid: 3583b5fed2b8dae49990579d187d7085, type: 3}
+    normal: {fileID: 2800000, guid: b5dd83b25006ebf4c950b7b4ab889679, type: 3}
+    smoothness: {fileID: 2800000, guid: beda8328a3763d240b9b320157b6fd31, type: 3}
     smoothnessChannel: 1
     isRoughness: 0
-    ao: {fileID: 2800000, guid: 22f4f8d7def8a38458debb3dc4d59e73, type: 3}
+    ao: {fileID: 2800000, guid: d8ccadf1411b2494e89cb4e9999e6d87, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}
@@ -186,14 +186,14 @@ MonoBehaviour:
     traxAOChannel: 1
     splat: {fileID: 0}
   - terrainLayer: {fileID: 0}
-    diffuse: {fileID: 2800000, guid: 8cdf314561efb894e9683cdcb18919b7, type: 3}
-    height: {fileID: 2800000, guid: 2a34427639f8040408d7db5f533f195a, type: 3}
+    diffuse: {fileID: 2800000, guid: 7d476aed7d0b0094bb17755a4aaf6871, type: 3}
+    height: {fileID: 2800000, guid: 11df44aae1b6f984e9ff91c02627f289, type: 3}
     heightChannel: 1
-    normal: {fileID: 2800000, guid: 81ddf59dca184364f988340d5cc7d926, type: 3}
-    smoothness: {fileID: 2800000, guid: f95c7a908ea91324dac5eeff13de305c, type: 3}
+    normal: {fileID: 2800000, guid: cf6c97a148478e54f801ec6ea4591a31, type: 3}
+    smoothness: {fileID: 2800000, guid: 7211fd9ef725d5541bfa404dbe8f1a7e, type: 3}
     smoothnessChannel: 1
     isRoughness: 0
-    ao: {fileID: 2800000, guid: 68d60d4744b83524ea16e0077d96d4a7, type: 3}
+    ao: {fileID: 2800000, guid: 5f11d17c87380754eaa3aca478832ed9, type: 3}
     aoChannel: 1
     emis: {fileID: 0}
     metal: {fileID: 0}

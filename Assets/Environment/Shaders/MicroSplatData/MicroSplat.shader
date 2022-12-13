@@ -133,6 +133,7 @@ _WorldHeightRange("World Height Range", Vector) = (0, 500, 0, 0)
       #define _USEGRADMIP 1
       #define _PERTEXUVSCALEOFFSET 1
       #define _WORLDUV 1
+      #define _PERTEXSATURATION 1
       #define _PERTEXTINT 1
       #define _BRANCHSAMPLES 1
       #define _PROCEDURALTEXTURE 1
@@ -5148,6 +5149,7 @@ float3 GetTessFactors ()
       #define _USEGRADMIP 1
       #define _PERTEXUVSCALEOFFSET 1
       #define _WORLDUV 1
+      #define _PERTEXSATURATION 1
       #define _PERTEXTINT 1
       #define _BRANCHSAMPLES 1
       #define _PROCEDURALTEXTURE 1
@@ -10079,6 +10081,7 @@ float3 GetTessFactors ()
       #define _USEGRADMIP 1
       #define _PERTEXUVSCALEOFFSET 1
       #define _WORLDUV 1
+      #define _PERTEXSATURATION 1
       #define _PERTEXTINT 1
       #define _BRANCHSAMPLES 1
       #define _PROCEDURALTEXTURE 1
@@ -15007,6 +15010,7 @@ float3 GetTessFactors ()
       #define _USEGRADMIP 1
       #define _PERTEXUVSCALEOFFSET 1
       #define _WORLDUV 1
+      #define _PERTEXSATURATION 1
       #define _PERTEXTINT 1
       #define _BRANCHSAMPLES 1
       #define _PROCEDURALTEXTURE 1
@@ -19933,6 +19937,7 @@ float3 GetTessFactors ()
       #define _USEGRADMIP 1
       #define _PERTEXUVSCALEOFFSET 1
       #define _WORLDUV 1
+      #define _PERTEXSATURATION 1
       #define _PERTEXTINT 1
       #define _BRANCHSAMPLES 1
       #define _PROCEDURALTEXTURE 1
@@ -24837,7 +24842,7 @@ float3 GetTessFactors ()
       
 
    }
-   Dependency "BaseMapShader" =  "Hidden/Stairs (1)_Base-1869626168"
-   Fallback "Hidden/Stairs (1)_Base-1869626168"
+   Dependency "BaseMapShader" =  "Hidden/Stairs (1)_Base-1284837116"
+   Fallback "Hidden/Stairs (1)_Base-1284837116"
    CustomEditor "MicroSplatShaderGUI"
 }
