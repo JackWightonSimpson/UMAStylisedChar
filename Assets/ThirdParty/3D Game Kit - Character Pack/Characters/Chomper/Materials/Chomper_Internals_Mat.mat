@@ -21,21 +21,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Chomper_Internals_Mat
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6f5cbfa019d652c42aa89867f4ea970e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ADD_PRECOMPUTED_VELOCITY
+  - _DISABLE_SSR_TRANSPARENT
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   - _OCCLUSIONMAP
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 2225
+  stringTagMap: {}
+  disabledShaderPasses:
+  - TransparentBackface
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -140,6 +142,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -154,18 +160,29 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AddPrecomputedVelocity: 1
     - _AlphaClip: 0
+    - _AlphaCutoff: 0.5
+    - _AlphaCutoffEnable: 0
+    - _AlphaDstBlend: 0
+    - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _Bias: 0
     - _Blend: 0
+    - _BlendMode: 0
+    - _BlendModePreserveSpecular: 1
     - _BlurStrength: 1
     - _BumpBias: 2
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _CurvatureInfluence: 0.5
     - _CurvatureScale: 0.02
-    - _Cutoff: 0.691
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 0
     - _DiffuseScatteringBias: 0
@@ -173,9 +190,13 @@ Material:
     - _DiffuseScatteringContraction: 8
     - _DiffuseScatteringContraction2: 8
     - _DisplaceAmount: 0.4
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
+    - _DstBlendAlpha: 0
     - _EdgeLength: 5
     - _EdgeSize: 0.2
+    - _EnableFogOnTransparent: 1
     - _EnableIndependentPuddleMaskTiling: 0
     - _EnablePOM: 0
     - _EnvironmentReflections: 1
@@ -201,12 +222,17 @@ Material:
     - _Mode: 0
     - _NoiseStrength: 0.4
     - _OcclusionStrength: 0.054
+    - _OpaqueCullMode: 2
     - _Parallax: 0.08
     - _ParallaxTiling: 1
     - _Phong: 1
     - _PuddleMaskTiling: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ReceivesSSR: 1
+    - _ReceivesSSRTransparent: 0
+    - _RenderQueueType: 1
+    - _RequireSplitLighting: 0
     - _RimPower: 0.31
     - _RimPower2: 0.38
     - _SelfOcclusion: 0
@@ -221,13 +247,34 @@ Material:
     - _Specular: 0.046
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 8
+    - _StencilRefDistortionVec: 4
+    - _StencilRefGBuffer: 10
+    - _StencilRefMV: 40
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 8
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskGBuffer: 14
+    - _StencilWriteMaskMV: 40
+    - _SupportDecals: 1
     - _Surface: 0
+    - _SurfaceType: 0
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentSortPriority: 0
+    - _TransparentZWrite: 1
     - _UVSec: 0
     - _UVs: 0
     - _UseMicroBumps: 0
+    - _UseShadowThreshold: 0
     - _Use_Gradient: 1
     - _WaterSlopeDamp: 0.5
     - _WorkflowMode: 1
+    - _ZTestDepthEqualForOpaque: 3
+    - _ZTestGBuffer: 4
+    - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -235,9 +282,10 @@ Material:
     - _Color2: {r: 0.72794116, g: 0.72794116, b: 0.72794116, a: 1}
     - _DiffuseScatteringCol: {r: 0, g: 0, b: 0, a: 1}
     - _DiffuseScatteringCol2: {r: 0, g: 0, b: 0, a: 1}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EdgeColor1: {r: 0, g: 1.2620687, b: 3.0000002, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _ParallaxToBaseRatio: {r: 1, g: 1, b: 0, a: 0}
     - _RimColor: {r: 0.29411763, g: 0.7371198, b: 1, a: 0}

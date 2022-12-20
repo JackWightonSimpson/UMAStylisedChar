@@ -163,6 +163,13 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 3
     m_InheritPosition: 1
@@ -198,7 +205,7 @@ GameObject:
   - component: {fileID: 1763035965278246573}
   - component: {fileID: 1763035965278246568}
   - component: {fileID: 3767513733800762554}
-  - component: {fileID: 2758882862316693158}
+  - component: {fileID: 2744891304521440075}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -246,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0
---- !u!114 &2758882862316693158
+--- !u!114 &2744891304521440075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,59 +262,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763035965278246572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c9beda531928fc40968802117a5d256, type: 3}
+  m_Script: {fileID: 11500000, guid: a4c41ac9245b87c4192012080077d830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RecenterTarget: 2
-  m_VerticalAxis:
-    Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
-    m_InputAxisName: Mouse Y
-    m_InputAxisValue: 0
-    m_InvertInput: 0
-    m_MinValue: -180
-    m_MaxValue: 180
-    m_Wrap: 1
-    m_Recentering:
-      m_enabled: 0
-      m_WaitTime: 1
-      m_RecenteringTime: 2
-      m_LegacyHeadingDefinition: -1
-      m_LegacyVelocityFilterStrength: -1
-  m_VerticalRecentering:
-    m_enabled: 1
-    m_WaitTime: 0
-    m_RecenteringTime: 0.1
-    m_LegacyHeadingDefinition: -1
-    m_LegacyVelocityFilterStrength: -1
-  m_HorizontalAxis:
-    Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
-    m_InputAxisValue: 0
-    m_InvertInput: 0
-    m_MinValue: 0
-    m_MaxValue: 0
-    m_Wrap: 0
-    m_Recentering:
-      m_enabled: 0
-      m_WaitTime: 1
-      m_RecenteringTime: 2
-      m_LegacyHeadingDefinition: -1
-      m_LegacyVelocityFilterStrength: -1
-  m_HorizontalRecentering:
-    m_enabled: 0
-    m_WaitTime: 1
-    m_RecenteringTime: 2
-    m_LegacyHeadingDefinition: -1
-    m_LegacyVelocityFilterStrength: -1
-  m_ApplyBeforeBody: 0
+  m_Damping: 0
 --- !u!1 &1763035965322914830
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +481,13 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 3
     m_InheritPosition: 1
@@ -724,7 +689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763035966173136303}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000007871348, y: 1.7062372, z: 0.0018508434}
+  m_LocalPosition: {x: -0.00000007917125, y: 1.7062429, z: 0.0018494129}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -762,6 +727,13 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 3
     m_InheritPosition: 1
@@ -1390,17 +1362,17 @@ PrefabInstance:
     - target: {fileID: 5399595094997214230, guid: 72d2c182c9875bb48a83f5970e50bd66,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000009374958
+      value: 0.00000007118996
       objectReference: {fileID: 0}
     - target: {fileID: 5399595094997214230, guid: 72d2c182c9875bb48a83f5970e50bd66,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07080775
+      value: 0.07081348
       objectReference: {fileID: 0}
     - target: {fileID: 5399595094997214230, guid: 72d2c182c9875bb48a83f5970e50bd66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.016006052
+      value: 0.01600463
       objectReference: {fileID: 0}
     - target: {fileID: 5577020240154195261, guid: 72d2c182c9875bb48a83f5970e50bd66,
         type: 3}
@@ -1817,7 +1789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RigLayers:
   - m_Rig: {fileID: 1872579976866204397}
-    m_Active: 0
+    m_Active: 1
   - m_Rig: {fileID: 1096721378110291768}
     m_Active: 0
   m_Effectors: []
@@ -2210,6 +2182,13 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

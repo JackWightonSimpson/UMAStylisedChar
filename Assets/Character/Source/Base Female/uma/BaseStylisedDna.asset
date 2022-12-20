@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28add7ad4625f8748a81d045544985b2, type: 3}
+  m_Name: BaseStylisedDna
+  m_EditorClassIdentifier: 
+  dnaTypeHash: 538294304
+  lastKnownAssetPath: Assets/Character/Source/Base Female/uma/BaseStylisedDna.asset
+  lastKnownDuplicateAssetPath: Assets/Character/Source/Base Female/uma/BaseStylisedDna
+    1.asset
+  lastKnownInstanceID: 75780
+  Names:
+  - HipsWidth
+  - HipsHeight
+  - HipsSize
+  - HipsAngle
+  - LegsSpacing
+  - LegsLength
+  - LegsSize
+  - LegsThighs
+  - LegsShins
+  - WaistSize
+  - WaistBelly
+  - ChestSize
+  - ShoulderWidth
+  - ShoulderSize
+  - BreastSize
+  - BreastCleavage
+  - BreastDiameter
+  - BreastPointed
+  - BreastAngle
+  - BreastSag
+  - BreastOut
+  - BreastNippleSize
+  - BreastNippleDiameter
+  - BumSize
+  - BumWidth
+  - BumSag
+  - ArmsSize
+  - ArmsLength
+  - ArmsUpper
+  - ArmsFore
+  - HandsSize
+  - HandsThick
+  - FeetSize
+  - HeadSize
+  - ShoulderTraps
+  - NeckSize
+  - NeckLength
+  - HeadWidth
+  - HeadHeight

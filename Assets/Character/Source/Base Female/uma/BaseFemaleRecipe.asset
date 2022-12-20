@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9448878e2e40f1a4c9f8fd2b56832b13, type: 3}
+  m_Name: BaseFemaleRecipe
+  m_EditorClassIdentifier: 
+  label: 
+  resourcesOnly: 0
+  recipeType: Standard
+  DisplayValue: 
+  compatibleRaces: []
+  wardrobeRecipeThumbs: []
+  wardrobeSlot: None
+  Hides: []
+  HideTags: []
+  suppressWardrobeSlots: []
+  activeWardrobeSet: []
+  MeshHideAssets: []
+  OverrideDNA:
+    PreloadValues: []
+  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"body","scale":100,"copyIdx":-1,"overlays":[{"id":"body_Overlay","colorIdx":0,"rect":[0.0,0.0,0.0,0.0],"isTransformed":false,"scale":{"x":1.0,"y":1.0,"z":1.0},"rotation":0.0}],"Tags":[],"Races":[]}],"colors":[],"fColors":[{"name":"Skin","colors":[255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0],"ShaderParms":[],"alwaysUpdate":false}],"sharedColorCount":1,"race":"Base
+    Female","packedDna":[{"dnaType":"DynamicUMADna","dnaTypeHash":538294304,"packedDna":"{\"bDnaAsset\":{\"instanceID\":75780},\"bDnaAssetName\":\"BaseStylisedDna\",\"bDnaSettings\":[{\"name\":\"HipsWidth\",\"value\":128},{\"name\":\"HipsHeight\",\"value\":128},{\"name\":\"HipsSize\",\"value\":128},{\"name\":\"HipsAngle\",\"value\":128},{\"name\":\"LegsSpacing\",\"value\":128},{\"name\":\"LegsLength\",\"value\":128},{\"name\":\"LegsSize\",\"value\":128},{\"name\":\"LegsThighs\",\"value\":128},{\"name\":\"LegsShins\",\"value\":128},{\"name\":\"WaistSize\",\"value\":128},{\"name\":\"WaistBelly\",\"value\":128},{\"name\":\"ChestSize\",\"value\":128},{\"name\":\"ShoulderWidth\",\"value\":128},{\"name\":\"ShoulderSize\",\"value\":128},{\"name\":\"BreastSize\",\"value\":128},{\"name\":\"BreastCleavage\",\"value\":128},{\"name\":\"BreastDiameter\",\"value\":128},{\"name\":\"BreastPointed\",\"value\":128},{\"name\":\"BreastAngle\",\"value\":128},{\"name\":\"BreastSag\",\"value\":128},{\"name\":\"BreastOut\",\"value\":128},{\"name\":\"BreastNippleSize\",\"value\":128},{\"name\":\"BreastNippleDiameter\",\"value\":128},{\"name\":\"BumSize\",\"value\":128},{\"name\":\"BumWidth\",\"value\":128},{\"name\":\"BumSag\",\"value\":128},{\"name\":\"ArmsSize\",\"value\":128},{\"name\":\"ArmsLength\",\"value\":128},{\"name\":\"ArmsUpper\",\"value\":128},{\"name\":\"ArmsFore\",\"value\":128},{\"name\":\"HandsSize\",\"value\":128},{\"name\":\"HandsThick\",\"value\":128},{\"name\":\"FeetSize\",\"value\":128},{\"name\":\"HeadSize\",\"value\":128},{\"name\":\"ShoulderTraps\",\"value\":128},{\"name\":\"NeckSize\",\"value\":128},{\"name\":\"NeckLength\",\"value\":128},{\"name\":\"HeadWidth\",\"value\":128},{\"name\":\"HeadHeight\",\"value\":128}]}"},{"dnaType":"DynamicUMADna","dnaTypeHash":2096118649,"packedDna":"{\"bDnaAsset\":{\"instanceID\":75796},\"bDnaAssetName\":\"FaceDna\",\"bDnaSettings\":[{\"name\":\"EyesSize\",\"value\":128},{\"name\":\"EyesSpacing\",\"value\":128},{\"name\":\"EyesAngle\",\"value\":128},{\"name\":\"EyesForward\",\"value\":128},{\"name\":\"EyesLids\",\"value\":128},{\"name\":\"EyesUpper\",\"value\":128},{\"name\":\"EyesLower\",\"value\":128},{\"name\":\"EyesUp\",\"value\":128}]}"}],"wardrobeSet":[],"packedRecipeType":"Standard"}'

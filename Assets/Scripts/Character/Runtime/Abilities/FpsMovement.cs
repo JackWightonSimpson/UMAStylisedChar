@@ -14,6 +14,7 @@ namespace Simpson.Character.Abilities
         [SerializeField] private CinemachineVirtualCamera defaultCam;
         [SerializeField] private CinemachineVirtualCamera aimCam;
         [SerializeField] private Transform camPivot;
+        [SerializeField] private Vector2 lookRange = new Vector2(-90f,120f);
 
         public bool toggleActivated = false;
         public bool stopActivated = false;
@@ -92,7 +93,7 @@ namespace Simpson.Character.Abilities
 
             // clamp our rotations so our values are limited 360 degrees
             currentRot = ClampAngle(currentRot, float.MinValue, float.MaxValue);
-            currentPitch = ClampAngle(currentPitch, -90, 120);
+            currentPitch = ClampAngle(currentPitch, lookRange.x, lookRange.y);
 
             CharacterStateManager.NextOrientation =
                 Quaternion.Slerp(transform.rotation,Quaternion.Euler(0,currentRot,0), CharacterStateManager.activeConfig.TurnAcceleration * Time.deltaTime);
